@@ -1073,6 +1073,9 @@ def possible_matches(dps, product_ids=None):
     """Return possible matching configs for a given set of
     dps values and product_ids."""
     for cfg in available_configs():
+        _LOGGER.warning("[CUSTOM LOG] config info: %s", cfg)
+        _LOGGER.warning("[CUSTOM LOG] dps info: %s", dps)
+        _LOGGER.warning("[CUSTOM LOG] product ids: %s", product_ids)
         parsed = TuyaDeviceConfig(cfg)
         try:
             if parsed.matches(dps, product_ids):
