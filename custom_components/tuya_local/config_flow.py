@@ -537,21 +537,27 @@ def create_test_device(hass: HomeAssistant, config: dict):
 
 
 async def async_test_connection(config: dict, hass: HomeAssistant):
+    _LOGGER.warning("[CUSTOM LOG] test connection, config: %s", config)
+
     domain_data = hass.data.get(DOMAIN)
     existing = domain_data.get(get_device_id(config)) if domain_data else None
     if existing and existing.get("device"):
+        _LOGGER.warning("[CUSTOM LOG] existing")
         _LOGGER.info("Pausing existing device to test new connection parameters")
         existing["device"].pause()
         await asyncio.sleep(5)
 
     try:
+        _LOGGER.warning("[CUSTOM LOG] trying create device")
         device = await hass.async_add_executor_job(
             create_test_device,
             hass,
             config,
         )
+        _LOGGER.warning("[CUSTOM LOG] refreshing")
         await device.async_refresh()
         retval = device if device.has_returned_state else None
+        _LOGGER.warning("[CUSTOM LOG] retval %s", retval)
     except Exception as e:
         _LOGGER.warning("Connection test failed with %s %s", type(e), e)
         retval = None
