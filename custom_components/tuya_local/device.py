@@ -5,6 +5,7 @@ API for Tuya Local devices.
 import asyncio
 import logging
 from asyncio.exceptions import CancelledError
+from dataclasses import dataclass
 from threading import Lock
 from time import time
 
@@ -37,7 +38,7 @@ def _collect_possible_matches(cached_state, product_ids):
     """Collect possible matches from generator into an array."""
     return list(possible_matches(cached_state, product_ids))
 
-
+@dataclass
 class TuyaLocalDevice(object):
     def __init__(
         self,

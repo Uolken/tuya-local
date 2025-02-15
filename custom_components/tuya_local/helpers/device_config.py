@@ -5,6 +5,7 @@ Config parser for Tuya Local devices.
 import logging
 from base64 import b64decode, b64encode
 from collections.abc import Sequence
+from dataclasses import dataclass
 from datetime import datetime
 from fnmatch import fnmatch
 from numbers import Number
@@ -88,6 +89,7 @@ def _remove_duplicates(seq):
     return [x for x in seq if not (x in seen or adder(x))]
 
 
+@dataclass
 class TuyaDeviceConfig:
     """Representation of a device config for Tuya Local devices."""
 
