@@ -1,28 +1,28 @@
 name: Doorbell
 products:
-  - id: izssbad7agdjlt8t2
-    manufacturer: CMD
-    model: VD89MK-Slim-Pro
+  - id: izssbad7agdjlt8t
+    manufacturer: Bcom
+    model: Majic IPBox
 entities:
   - entity: camera
     dps:
       - id: 150
-        name: record_switch
+        name: record
         type: boolean
         optional: true
       - id: 154
-        name: doorbell_pic
+        name: snapshot
         type: base64
         persist: false
         optional: true
         sensitive: true
         mapping:
           - dps_val: ""
-            value_redirect: movement_detect_pic
+            value_redirect: motion_detected
           - dps_val: null
-            value_redirect: movement_detect_pic
+            value_redirect: motion_detected
       - id: 115
-        name: movement_detect_pic
+        name: motion_detected
         type: base64
         optional: true
         sensitive: true
@@ -32,7 +32,7 @@ entities:
       - id: 232
         type: boolean
         optional: true
-        name: ipc_c_lock
+        name: lock
         mapping:
           - dps_val: true
             value: false
@@ -44,7 +44,7 @@ entities:
     dps:
       - id: 101
         type: boolean
-        name: basic_indicator
+        name: switch
   - entity: switch
     name: Flip image
     icon: "mdi:flip-horizontal"
@@ -53,7 +53,7 @@ entities:
       - id: 103
         type: boolean
         optional: true
-        name: basic_flip
+        name: switch
   - entity: switch
     name: Watermark
     category: config
@@ -62,7 +62,7 @@ entities:
       - id: 104
         type: boolean
         optional: true
-        name: basic_osd
+        name: switch
   - entity: select
     name: Motion Detection
     icon: "mdi:motion-sensor"
@@ -71,7 +71,7 @@ entities:
       - id: 106
         type: string
         optional: true
-        name: motion_sensitivity
+        name: option
         mapping:
           - dps_val: "0"
             value: Low
@@ -87,7 +87,7 @@ entities:
       - id: 108
         type: string
         optional: true
-        name: basic_nightvision
+        name: option
         mapping:
           - dps_val: "0"
             value: Auto
@@ -103,7 +103,7 @@ entities:
       - id: 110
         type: integer
         optional: true
-        name: sd_status
+        name: sensor
         mapping:
           - dps_val: 1
             value: normal
@@ -118,20 +118,20 @@ entities:
       - id: 109
         type: string
         optional: true
-        name: sd_storge
+        name: capacity
   - entity: button
-    name: Format SD
+    name: SD format
     category: config
     icon: "mdi:micro-sd"
     dps:
       - id: 111
         type: boolean
         optional: true
-        name: sd_format
+        name: button
       - id: 117
         type: integer
         optional: true
-        name: sd_format_state
+        name: status
         mapping:
           - dps_val: 2000
             value: Formatting
@@ -149,7 +149,7 @@ entities:
       - id: 151
         type: string
         optional: true
-        name: record_mode
+        name: option
         mapping:
           - dps_val: "1"
             value: Event
@@ -162,7 +162,7 @@ entities:
       - id: 162
         type: boolean
         optional: true
-        name: device_restart
+        name: button
   - entity: sensor
     name: Channel
     icon: "mdi:ab-testing"
@@ -171,13 +171,13 @@ entities:
       - id: 231
         type: string
         optional: true
-        name: ipc_c_switch_channel
+        name: sensor
   - entity: event
     class: doorbell
     dps:
       - id: 136
         type: string
-        name: doorbell_active
+        name: event
         optional: true
         mapping:
           - dps_val: null
@@ -195,7 +195,7 @@ entities:
       - id: 148
         type: boolean
         optional: true
-        name: accessory_lock
+        name: lock
         mapping:
           - dps_val: true
             value: false
