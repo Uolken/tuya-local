@@ -381,11 +381,14 @@ class TuyaLocalDevice(object):
             self._api.parent.set_socketPersistent(False)
 
     def set_detected_product_id(self, product_id):
+        _LOGGER.warning("[CUSTOM LOG] adding detected product id: %s", product_id)
         self._product_ids.append(product_id)
 
     async def async_possible_types(self):
+        _LOGGER.warning("[CUSTOM LOG] getting possible types")
         cached_state = self._get_cached_state()
         if len(cached_state) <= 1:
+            _LOGGER.warning("[CUSTOM LOG] no cached state")
             # in case of device22 devices, we need to poll them with a dp
             # that exists on the device to get anything back.  Most switch-like
             # devices have dp 1. Lights generally start from 20.  101 is where
@@ -406,6 +409,11 @@ class TuyaLocalDevice(object):
             )
             await self.async_refresh()
             cached_state = self._get_cached_state()
+
+        _LOGGER.warning("[CUSTOM LOG] adding executor job")
+        _LOGGER.warning("[CUSTOM LOG] product ids:")
+        for id in self._product_ids:
+            _LOGGER.warning("[CUSTOM LOG] %s", id)
 
         return await self._hass.async_add_executor_job(
             _collect_possible_matches,

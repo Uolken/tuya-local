@@ -330,6 +330,7 @@ class ConfigFlowHandler(ConfigFlow, domain=DOMAIN):
                 devcid_opts = {"default": self.__cloud_device.get(CONF_DEVICE_CID)}
 
         if user_input is not None:
+            _LOGGER.warning("[CUSTOM LOG] configuring local device")
             self.device = await async_test_connection(user_input, self.hass)
             if self.device:
                 self.data = user_input
