@@ -45,7 +45,7 @@ entities:
       - id: 101
         type: boolean
         name: basic_indicator
-  - entity: flip
+  - entity: switch
     name: Flip image
     icon: "mdi:flip-horizontal"
     category: config
