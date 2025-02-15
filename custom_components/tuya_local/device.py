@@ -480,6 +480,10 @@ class TuyaLocalDevice(object):
         self._last_connection = 0
 
     def _refresh_cached_state(self):
+        _LOGGER.warning("[CUSTOM LOG] api version %s", self._api.version)
+        _LOGGER.warning("[CUSTOM LOG] id %s", self._api.id)
+        _LOGGER.warning("[CUSTOM LOG] address %s", self._api.address)
+        _LOGGER.warning("[CUSTOM LOG] secret %s", self._api.local_key)
         new_state = self._api.status()
         if new_state:
             self._cached_state = self._cached_state | new_state.get("dps", {})
