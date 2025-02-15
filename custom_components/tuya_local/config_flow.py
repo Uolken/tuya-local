@@ -381,8 +381,10 @@ class ConfigFlowHandler(ConfigFlow, domain=DOMAIN):
         best_match = 0
         best_matching_type = None
 
+        _LOGGER.warning("[CUSTOM LOG] device info: %s", self.device)
         for type in await self.device.async_possible_types():
             types.append(type.config_type)
+            _LOGGER.warning("[CUSTOM LOG] Checking possible type: %s", type)
             q = type.match_quality(
                 self.device._get_cached_state(),
                 self.device._product_ids,
